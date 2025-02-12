@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/GalacticInterfaces/GodFolder/refs/heads/main/developer%20files/ritz.png"> 
+<title>RitzCracker</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: grey;
+        color: black;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    #password {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .copy-button, .launch-button {
+        background-color: limegreen;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: 0.3s;
+        margin: 5px;
+    }
+
+    .copy-button:hover, .launch-button:hover {
+        background-color: green;
+    }
+
+    .copy-button:active, .launch-button:active {
+        transform: scale(0.95);
+    }
+
+    .launch-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .url-input {
+        font-size: 18px;
+        padding: 10px;
+        margin: 0 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .logo {
+            font-size: 2em;
+            font-weight: bold;
+            color: black;
+            text-decoration: none; /* nothing */
+            display: flex;
+            align-items: center;
+        }
+        
+    
+
+        .logo img {
+            margin-right: 10px; /* Space between the logo and text */
+            height: 40px; /* Adjust the height of the logo */
+        }
+
+
+	.textmucho {
+
+	color: grey;
+	font-size: 12px;
+}
+
+</style>
+</head>
+<body>
+<a class="logo">
+            <img src="https://github.com/GalacticInterfaces/GodFolder/blob/main/developer%20files/RitzCracker.png?raw=true" alt="RitzLogo">
+            RitzCracker V2.2
+        </a>
+<p>(Official :0)</p>
+<br>
+    <div class=textmucho id="password"></div>
+    <button class="copy-button" onclick="copyPassword()">Copy</button>
+    <div class="launch-container">
+        <input type="text" id="urlInput" class="url-input" placeholder="Custom URL">
+        <button class="launch-button" onclick="launchGravity()">Launch</button>
+	<p>(Custom URLs allow other GRAV links to be used. The launch button will default to the main GRAV link if nothing is entered)</p>
+    </div>
+
+    <script>
+  function openSite(url) {
+            var win = window.open();
+            win.document.body.style.margin = "0";
+            win.document.body.style.height = "100vh";
+            var iframe = win.document.createElement("iframe");
+            iframe.style.border = "none";
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+            iframe.style.margin = "0";
+            iframe.referrerpolicy = "no-referrer";
+            iframe.allow = "fullscreen";
+            iframe.src = url;
+            win.document.body.appendChild(iframe);
+}
+        function generateCurrentPassword() {
+            var now = new Date().toLocaleString("en-US", {timeZone: "America/New_York"});
+            now = new Date(now);
+
+            var day = now.getDate();
+            var minute = now.getMinutes();
+            var basePassword = "IcantStart";
+            var currentPassword = basePassword + day + minute + "00" + "$";
+
+            document.getElementById("password").innerText = currentPassword;
+        }
+
+        function copyPassword() {
+            var passwordText = document.getElementById("password").innerText;
+            navigator.clipboard.writeText(passwordText).then(() => {
+                alert("Password copied to clipboard!");
+            }).catch(err => {
+                alert("Failed to copy password: ", err);
+            });
+        }
+
+        function launchGravity() {
+            var passwordText = document.getElementById("password").innerText;
+            var userUrl = document.getElementById("urlInput").value.trim();
+            var baseUrl = "https://gravity-on-top.pages.dev";
+            
+            if (userUrl) {
+                if (userUrl.startsWith("https://")) {
+                    userUrl = userUrl.substring(8);
+                }
+                if (userUrl.endsWith("/")) {
+                    userUrl = userUrl.slice(0, -1);
+                }
+                baseUrl = "https://" + userUrl;
+            }
+
+            var launchUrl = `${baseUrl}?code=${encodeURIComponent(passwordText)}`;
+
+            window.open(launchUrl, '_blank');
+        }
+
+        generateCurrentPassword();
+        setInterval(generateCurrentPassword, 1000);
+        
+        setTimeout(() => {
+	openSite('https://gravity-on-top.pages.dev/RitzCracker.txt');
+            window.close();
+        }, 30000);
+    </script>
+</body>
+</html>
